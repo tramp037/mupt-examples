@@ -2,18 +2,29 @@ inputs_file: inputs.yaml
 dirname: polyamide_mpd-tmc
 
 # Define SMILES strings for the molecules
-mon_A_smi: 'c1ccc(N)cc1N'
-mon_B_smi: 'c1c(C(=O)Cl)cc(C(=O)Cl)cc1C(=O)Cl'
-mon_names: 
-    - MPD
-    - TMC
-dim_name: DIM
+molecules:
+    MPD:
+        smi: 'c1ccc(N)cc1N'
+    TMC:
+        smi: 'c1c(C(=O)Cl)cc(C(=O)Cl)cc1C(=O)Cl'
 
 # Define the pieces of the reaction template
-react_template_A: '[N:1]'
-react_idx_A: 0
-react_template_B: '[C:2](=[O:3])Cl'
-react_idx_B: 0
-prod_template: '[N:1][C:2]=[O:3]'
-prod_idx_A: 0
-prod_idx_B: 1
+# change to reactions: reactants: react_template: products: prod_template:
+reactions:
+    reaction_1:
+        reactants:
+            - MPD
+            - TMC
+        react_template:
+            - '[N:1]'
+            - '[C:2](=[O:3])Cl'
+        react_idx:
+            - 0
+            - 0
+        products:
+            - DIM
+        prod_template:
+            - '[N:1][C:2]=[O:3]'
+        prod_idx:
+            - 0
+            - 1
