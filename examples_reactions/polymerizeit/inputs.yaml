@@ -1,30 +1,55 @@
 inputs_file: inputs.yaml
 dirname: polyamide_mpd-tmc
 
-# Define SMILES strings for the molecules
-molecules:
-    MPD:
-        smi: 'c1ccc(N)cc1N'
-    TMC:
-        smi: 'c1c(C(=O)Cl)cc(C(=O)Cl)cc1C(=O)Cl'
+# Define SMILES strings for the monomers
+monomers:
+    - name: MPD
+      smi: 'c1ccc(N)cc1N'
+    - name: TMC
+      smi: 'c1c(C(=O)Cl)cc(C(=O)Cl)cc1C(=O)Cl'
 
 # Define the pieces of the reaction template
 # change to reactions: reactants: react_template: products: prod_template:
 reactions:
-    reaction_1:
-        reactants:
+    polyamide:
+        reactants: 
             - MPD
             - TMC
         react_template:
             - '[N:1]'
-            - '[C:2](=[O:3])Cl'
+            - '[C:2](=[O:3])[Cl:4]'
         react_idx:
             - 0
             - 0
         products:
             - DIM
+            - HCL
         prod_template:
             - '[N:1][C:2]=[O:3]'
+            - '[Cl:4]'
         prod_idx:
             - 0
             - 1
+
+replicas:
+    - tag: 10k_base
+      temperature: 300
+      density: 0.8
+      total_atoms: 10000
+      monomer_ratios:
+          mpd: 3.0
+          tmc: 2.0
+    - tag: 100k_base
+      temperature: 300
+      density: 0.8
+      total_atoms: 100000
+      monomer_ratios:
+          mpd: 3.0
+          tmc: 2.0
+
+engine: 
+    name: polymerizeit
+    inputs:
+        num_iterations: 10
+
+
