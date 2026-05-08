@@ -9,7 +9,6 @@ monomers:
       smi: 'c1c(C(=O)Cl)cc(C(=O)Cl)cc1C(=O)Cl'
 
 # Define the pieces of the reaction template
-# change to reactions: reactants: react_template: products: prod_template:
 reactions:
     polyamide:
         reactants: 
@@ -31,25 +30,29 @@ reactions:
             - 0
             - 1
 
-replicas:
-    - tag: 10k_base
+reaction_engine: 
+    name: polymerizeit
+    inputs:
+        num_iterations: 10
+        protocol: default
+        simulation_engine: gromacs
+        ff_tool: ambertools
+        forcefield: gaff
+
+system_parameters:
+    - name: 10k_base
       temperature: 300
       density: 0.8
       total_atoms: 10000
       monomer_ratios:
-          mpd: 3.0
-          tmc: 2.0
-    - tag: 100k_base
+          MPD: 3.0
+          TMC: 2.0
+    - name: 100k_base
       temperature: 300
       density: 0.8
       total_atoms: 100000
       monomer_ratios:
-          mpd: 3.0
-          tmc: 2.0
-
-engine: 
-    name: polymerizeit
-    inputs:
-        num_iterations: 10
+          MPD: 3.0
+          TMC: 2.0
 
 
