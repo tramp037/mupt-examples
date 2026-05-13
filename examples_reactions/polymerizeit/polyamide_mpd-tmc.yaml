@@ -1,4 +1,3 @@
-inputs_file: inputs.yaml
 dirname: polyamide_mpd-tmc
 
 # Define SMILES strings for the monomers
@@ -38,6 +37,7 @@ reaction_engine:
         simulation_engine: gromacs
         ff_tool: ambertools
         forcefield: gaff
+        distance_cutoff: 0.5
 
 system_parameters:
     - name: 10k_base

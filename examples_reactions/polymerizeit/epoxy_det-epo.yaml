@@ -1,0 +1,57 @@
+dirname: epoxy_det-epo
+
+# Define SMILES strings for the monomers
+monomers:
+    - name: DET
+      smi: 'c1c(CC)c(N)c(C)c(N)c1CC'
+    - name: EPO
+      smi: 'CC(O)COc1ccc(Cc2ccc(OCC(O)C)cc2)cc1'
+
+# Define the pieces of the reaction template
+# note: First product is used as the repeat unit, others are byproducts
+reactions:
+    polyamide:
+        reactants: 
+            - DET
+            - EPO
+        react_template:
+            - '[N:1]'
+            - '[C:2][C:3]([O:4])[C:5]'
+        react_idx:
+            - 0
+            - 0
+        products:
+            - DIM
+        prod_template:
+            - '[N:1][C:2][C:3]([O:4])[C:5]'
+        prod_idx:
+            - 0
+            - 1
+
+reaction_engine: 
+    name: polymerizeit
+    inputs:
+        num_iterations: 10
+        protocol: default
+        simulation_engine: gromacs
+        ff_tool: ambertools
+        forcefield: gaff
+        distance_cutoff: 0.5
+
+system_parameters:
+    - name: 10k_base
+      temperature: 300
+      density: 0.8
+      total_atoms: 10000
+      monomer_ratios:
+          DET: 1.0
+          EPO: 1.0
+    - name: 100k_base
+      temperature: 300
+      density: 0.8
+      total_atoms: 100000
+      monomer_ratios:
+          DET: 1.0
+          EPO: 1.0
+
+
