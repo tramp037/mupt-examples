@@ -10,7 +10,7 @@ monomers:
 # Define the pieces of the reaction template
 # note: First product is used as the repeat unit, others are byproducts
 reactions:
-    polyamide:
+    epoxy_primary:
         reactants: 
             - DET
             - EPO
@@ -24,6 +24,23 @@ reactions:
             - DIM
         prod_template:
             - '[N:1][C:2][C:3]([O:4])[C:5]'
+        prod_idx:
+            - 0
+            - 1
+    epoxy_secondary:
+        reactants: 
+            - DIM
+            - EPO
+        react_template:
+            - '[N:1][C:2][C:3]([O:4])[C:5]'
+            - '[C:6][C:7]([O:8])[C:9]'
+        react_idx:
+            - 0
+            - 1
+        products:
+            - TRI
+        prod_template:
+            - '[N:1]([C:6][C:7]([O:8])[C:9])[C:2][C:3]([O:4])[C:5]'
         prod_idx:
             - 0
             - 1
